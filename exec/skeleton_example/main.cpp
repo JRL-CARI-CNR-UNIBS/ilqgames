@@ -63,7 +63,7 @@
 #include <imgui/imgui_impl_opengl3.h>
 
 // Optional log saving and visualization.
-DEFINE_bool(save, false, "Optionally save solver logs to disk.");
+DEFINE_bool(save, true, "Optionally save solver logs to disk.");
 DEFINE_bool(viz, true, "Visualize results in a GUI.");
 DEFINE_bool(last_traj, false,
             "Should the solver only dump the last trajectory?");

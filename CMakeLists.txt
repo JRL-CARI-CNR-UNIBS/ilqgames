@@ -19,9 +19,6 @@ include(cmake/Dependencies.cmake)
 # Check for C++17 features and enable.
 ilqgames_enable_cpp17()
 
-# Set compiler constants.
-add_definitions(-DILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs")
-
 # Set the build type. Default to Release mode.
 if(NOT CMAKE_BUILD_TYPE)
   message("Defaulting to building targets in Release mode.")
@@ -38,10 +35,28 @@ include_directories(${CMAKE_SOURCE_DIR}/include ${imgui_SOURCE_DIR}/include)
 file(GLOB_RECURSE ilqgames_srcs ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_library(ilqgames ${ilqgames_srcs})
 
+# Set compiler constants and expose them.
+# add_definitions(-DILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs")
+# set(ENV{ILQGAMES_LOG_DIR} "${CMAKE_SOURCE_DIR}/logs" CACHE STRING "Log directory used by the solver to dump results")
+target_compile_definitions(ilqgames PUBLIC ILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs") # logging directory used by the solver to dump results
+
+# Display compiler constants
+get_target_property(DEFS ilqgames INTERFACE_COMPILE_DEFINITIONS)
+message("Compile definitions: " ${DEFS})
+
+
+# === INSTALLATION === #
+
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ilqgames DESTINATION include/ilqgames)
 install(TARGETS ilqgames
+  # EXPORT ilqgamesTarget # MODIFICA
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib)
+
+# install(EXPORT ilqgamesTarget # MODIFICA
+# DESTINATION share/ilqgames/cmake # MODIFICA
+# FILE ilqgamesTarget.cmake) # MODIFICA
+
 
 # Set up output directory for executables.
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/)
@@ -60,3 +75,4 @@ if (BUILD_DOCUMENTATION)
   message("Build documentation is enabled.")
   add_subdirectory(documentation)
 endif (BUILD_DOCUMENTATION)
+

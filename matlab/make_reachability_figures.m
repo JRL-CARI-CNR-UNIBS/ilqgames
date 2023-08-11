@@ -281,8 +281,8 @@ end
 function minimally_invasive_example()
   close all;
 
-  exec = "minimally_invasive_intersection_example";
-  experiment_name = "minimally_invasive_example";
+  exec = "three_player_intersection"; %"minimally_invasive_intersection_example";
+  experiment_name = "prova"; %minimally_invasive_example";
   regularization = 0.01;
 
   if ~experiment_already_run(char(experiment_name + "_safety"))
@@ -342,13 +342,13 @@ function [t0, xs, V1] = unpack_log(experiment_name, iter)
   cd('../../../matlab');
 
   t0 = load(log_folder + experiment_name + "/" + iter + "/" + ...
-            last_iterate + "/t0.txt");
+            "/t0.txt");
   xs = load(log_folder + experiment_name + "/" + iter + "/" + ...
-            last_iterate + "/xs.txt");
+            "/xs.txt");
 
   %% Get value for player 1.
   Vs = load(log_folder + experiment_name + "/" + iter + "/" + ...
-            last_iterate + "/costs.txt");
+            "/costs.txt");
   V1 = Vs(1);
 end
 
