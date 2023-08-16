@@ -122,3 +122,6 @@ compile_commands.json
 
 # qt
 *.user
+
+# Doxygen documentation
+documentation/
