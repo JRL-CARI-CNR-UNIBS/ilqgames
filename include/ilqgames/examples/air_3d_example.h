@@ -47,6 +47,12 @@
 #include <ilqgames/solver/solver_params.h>
 #include <ilqgames/solver/top_down_renderable_problem.h>
 
+DECLARE_double(rx0);
+DECLARE_double(ry0);
+DECLARE_double(rtheta0);
+DECLARE_double(ve);
+DECLARE_double(vp);
+
 namespace ilqgames {
 
 class Air3DExample : public TopDownRenderableProblem {

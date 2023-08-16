@@ -48,6 +48,11 @@
 #include <ilqgames/solver/solver_params.h>
 #include <ilqgames/solver/top_down_renderable_problem.h>
 
+DECLARE_double(px0);
+DECLARE_double(py0);
+DECLARE_double(theta0);
+DECLARE_double(v0);
+
 namespace ilqgames {
 
 class TwoPlayerReachabilityExample : public TopDownRenderableProblem {

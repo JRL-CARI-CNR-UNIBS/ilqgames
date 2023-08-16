@@ -1,0 +1,48 @@
+\hypertarget{classilqgames_1_1_cost}{}\doxysection{ilqgames\+::Cost Class Reference}
+\label{classilqgames_1_1_cost}\index{ilqgames::Cost@{ilqgames::Cost}}
+Inheritance diagram for ilqgames\+::Cost\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.877551cm]{classilqgames_1_1_cost}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_cost_a90ad7fc2697f0d8c3392dc5a079e40f9}\label{classilqgames_1_1_cost_a90ad7fc2697f0d8c3392dc5a079e40f9}} 
+virtual float {\bfseries Evaluate} (Time t, const Vector\+Xf \&input) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_cost_a6857aa0bd5005626cd674d01ee544a74}\label{classilqgames_1_1_cost_a6857aa0bd5005626cd674d01ee544a74}} 
+virtual void {\bfseries Quadraticize} (Time t, const Vector\+Xf \&input, Matrix\+Xf $\ast$hess, Vector\+Xf $\ast$grad) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_cost_a099e8ab748c378007cd63293ba928cae}\label{classilqgames_1_1_cost_a099e8ab748c378007cd63293ba928cae}} 
+void {\bfseries Set\+Weight} (float weight)
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_cost_abcf058c9ca728990f8f5b3c6acf4ead2}\label{classilqgames_1_1_cost_abcf058c9ca728990f8f5b3c6acf4ead2}} 
+void {\bfseries Scale\+Weight} (float scale)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_cost_aa12ced188907eefb55bfd82d99ae998b}\label{classilqgames_1_1_cost_aa12ced188907eefb55bfd82d99ae998b}} 
+{\bfseries Cost} (float weight, const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_cost_a03c98f733c0e722960dad9e80e235652}\label{classilqgames_1_1_cost_a03c98f733c0e722960dad9e80e235652}} 
+float {\bfseries weight\+\_\+}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 55 of file cost.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/abel/\+Documents/\+H\+R\+I\+\_\+\+Ph\+D/ilqgames/include/ilqgames/cost/cost.\+h\end{DoxyCompactItemize}

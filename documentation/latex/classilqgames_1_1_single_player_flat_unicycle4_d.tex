@@ -1,0 +1,88 @@
+\hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d}{}\doxysection{ilqgames\+::Single\+Player\+Flat\+Unicycle4D Class Reference}
+\label{classilqgames_1_1_single_player_flat_unicycle4_d}\index{ilqgames::SinglePlayerFlatUnicycle4D@{ilqgames::SinglePlayerFlatUnicycle4D}}
+Inheritance diagram for ilqgames\+::Single\+Player\+Flat\+Unicycle4D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classilqgames_1_1_single_player_flat_unicycle4_d}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_ae5c64aa26466f8034608f24bbeea58ce}\label{classilqgames_1_1_single_player_flat_unicycle4_d_ae5c64aa26466f8034608f24bbeea58ce}} 
+Vector\+Xf {\bfseries Evaluate} (const Vector\+Xf \&x, const Vector\+Xf \&u) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_acec479d35d9eb1fe79cf150046cd96bd}\label{classilqgames_1_1_single_player_flat_unicycle4_d_acec479d35d9eb1fe79cf150046cd96bd}} 
+void {\bfseries Linearized\+System} (Eigen\+::\+Ref$<$ Matrix\+Xf $>$ A, Eigen\+::\+Ref$<$ Matrix\+Xf $>$ B) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a87195f6978c62d6c5ec6a7dfa4255c54}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a87195f6978c62d6c5ec6a7dfa4255c54}} 
+Matrix\+Xf {\bfseries Inverse\+Decoupling\+Matrix} (const Vector\+Xf \&x) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a109a9ed8e0eb712e5ee75a990c3b8f64}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a109a9ed8e0eb712e5ee75a990c3b8f64}} 
+Vector\+Xf {\bfseries Affine\+Term} (const Vector\+Xf \&x) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_af4e7108111b78db4fb4fabe84f8ca262}\label{classilqgames_1_1_single_player_flat_unicycle4_d_af4e7108111b78db4fb4fabe84f8ca262}} 
+Vector\+Xf {\bfseries To\+Linear\+System\+State} (const Vector\+Xf \&x) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a84b8b3ffdb5e6e9348aaf3b158adf70b}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a84b8b3ffdb5e6e9348aaf3b158adf70b}} 
+Vector\+Xf {\bfseries From\+Linear\+System\+State} (const Vector\+Xf \&xi) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a4f1eaed9572993c56b26cd4964fe5acc}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a4f1eaed9572993c56b26cd4964fe5acc}} 
+void {\bfseries Partial} (const Vector\+Xf \&xi, std\+::vector$<$ Vector\+Xf $>$ $\ast$grads, std\+::vector$<$ Matrix\+Xf $>$ $\ast$hesses) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a07b76e998e9fc855357d997d16693cdc}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a07b76e998e9fc855357d997d16693cdc}} 
+bool {\bfseries Is\+Linear\+System\+State\+Singular} (const Vector\+Xf \&xi) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_aaaf68f91709ed3368c130b201a84fff9}\label{classilqgames_1_1_single_player_flat_unicycle4_d_aaaf68f91709ed3368c130b201a84fff9}} 
+float {\bfseries Distance\+Between} (const Vector\+Xf \&x0, const Vector\+Xf \&x1) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a78555184b3b671eab507eae5fa062bcc}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a78555184b3b671eab507eae5fa062bcc}} 
+std\+::vector$<$ Dimension $>$ {\bfseries Position\+Dimensions} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a041e0a16201ec6acf1a5fdb864dd337f}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a041e0a16201ec6acf1a5fdb864dd337f}} 
+static const Dimension {\bfseries k\+Num\+X\+Dims} = 4
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a811a52c424ad4ac644f515afddcf8a44}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a811a52c424ad4ac644f515afddcf8a44}} 
+static const Dimension {\bfseries k\+Px\+Idx} = 0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_abf9a17bc148226848151e65312ddc06c}\label{classilqgames_1_1_single_player_flat_unicycle4_d_abf9a17bc148226848151e65312ddc06c}} 
+static const Dimension {\bfseries k\+Py\+Idx} = 1
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a8574888ffd9f38ff34be962c44943c0f}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a8574888ffd9f38ff34be962c44943c0f}} 
+static const Dimension {\bfseries k\+Theta\+Idx} = 2
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_acd6bca017ce205bce9aeb5665ed1aae0}\label{classilqgames_1_1_single_player_flat_unicycle4_d_acd6bca017ce205bce9aeb5665ed1aae0}} 
+static const Dimension {\bfseries k\+V\+Idx} = 3
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a375c36dbc8e52637437fe99b5a9b2466}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a375c36dbc8e52637437fe99b5a9b2466}} 
+static const Dimension {\bfseries k\+Vx\+Idx} = 2
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a68b5611a53dd719e5eb978bee530ede6}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a68b5611a53dd719e5eb978bee530ede6}} 
+static const Dimension {\bfseries k\+Vy\+Idx} = 3
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a78e81e4a6c7dcd325b1e10f16408927e}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a78e81e4a6c7dcd325b1e10f16408927e}} 
+static const Dimension {\bfseries k\+Num\+U\+Dims} = 2
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_aeb2485251d0e23f2d09e34bc75bf19aa}\label{classilqgames_1_1_single_player_flat_unicycle4_d_aeb2485251d0e23f2d09e34bc75bf19aa}} 
+static const Dimension {\bfseries k\+Omega\+Idx} = 0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_unicycle4_d_a23e2e7c24651bc528073b81d42ef6a6f}\label{classilqgames_1_1_single_player_flat_unicycle4_d_a23e2e7c24651bc528073b81d42ef6a6f}} 
+static const Dimension {\bfseries k\+A\+Idx} = 1
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 62 of file single\+\_\+player\+\_\+flat\+\_\+unicycle\+\_\+4d.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/abel/\+Documents/\+H\+R\+I\+\_\+\+Ph\+D/ilqgames/include/ilqgames/dynamics/single\+\_\+player\+\_\+flat\+\_\+unicycle\+\_\+4d.\+h\item 
+/home/abel/\+Documents/\+H\+R\+I\+\_\+\+Ph\+D/ilqgames/src/single\+\_\+player\+\_\+flat\+\_\+unicycle\+\_\+4d.\+cpp\end{DoxyCompactItemize}

@@ -52,6 +52,7 @@
 #include <ilqgames/dynamics/single_player_dubins_car.h>
 #include <ilqgames/dynamics/single_player_point_mass_2d.h>
 #include <ilqgames/examples/modified_air_3d_example.h>
+#include <ilqgames/examples/air_3d_example.h> // to avoid redefinition of the same flags
 #include <ilqgames/geometry/draw_shapes.h>
 #include <ilqgames/geometry/polyline2.h>
 #include <ilqgames/solver/ilq_solver.h>
@@ -65,11 +66,11 @@
 #include <vector>
 
 // Initial state command-line flags.
-DEFINE_double(rx0, 4.0, "Initial x-position (m).");
-DEFINE_double(ry0, 3.0, "Initial y-position (m).");
-DEFINE_double(rtheta0, M_PI / 4.0, "Initial heading (rad).");
-DEFINE_double(ve, 1.0, "Evader speed (m/s).");
-DEFINE_double(vp, 1.0, "Pursuer speed (m/s).");
+//DEFINE_double(rx0, 4.0, "Initial x-position (m).");
+//DEFINE_double(ry0, 3.0, "Initial y-position (m).");
+//DEFINE_double(rtheta0, M_PI / 4.0, "Initial heading (rad).");
+//DEFINE_double(ve, 1.0, "Evader speed (m/s).");
+//DEFINE_double(vp, 1.0, "Pursuer speed (m/s).");
 
 namespace ilqgames {
 

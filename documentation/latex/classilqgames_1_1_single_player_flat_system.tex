@@ -1,0 +1,77 @@
+\hypertarget{classilqgames_1_1_single_player_flat_system}{}\doxysection{ilqgames\+::Single\+Player\+Flat\+System Class Reference}
+\label{classilqgames_1_1_single_player_flat_system}\index{ilqgames::SinglePlayerFlatSystem@{ilqgames::SinglePlayerFlatSystem}}
+Inheritance diagram for ilqgames\+::Single\+Player\+Flat\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classilqgames_1_1_single_player_flat_system}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a20c9491dcf6871772de086a11d30d5d7}\label{classilqgames_1_1_single_player_flat_system_a20c9491dcf6871772de086a11d30d5d7}} 
+virtual Vector\+Xf {\bfseries Evaluate} (const Vector\+Xf \&x, const Vector\+Xf \&u) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a3ee4cb1e9bdcff112bb89875420e88c3}\label{classilqgames_1_1_single_player_flat_system_a3ee4cb1e9bdcff112bb89875420e88c3}} 
+virtual void {\bfseries Linearized\+System} (Eigen\+::\+Ref$<$ Matrix\+Xf $>$ A, Eigen\+::\+Ref$<$ Matrix\+Xf $>$ B) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a3683c7873c019f02d8bfcaa0de1afa16}\label{classilqgames_1_1_single_player_flat_system_a3683c7873c019f02d8bfcaa0de1afa16}} 
+virtual Matrix\+Xf {\bfseries Inverse\+Decoupling\+Matrix} (const Vector\+Xf \&x) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a4ce7b06850b71df461800dccf9683a20}\label{classilqgames_1_1_single_player_flat_system_a4ce7b06850b71df461800dccf9683a20}} 
+virtual Vector\+Xf {\bfseries Affine\+Term} (const Vector\+Xf \&x) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a6db7e42b2b9c2e5b02f94400843eb9d2}\label{classilqgames_1_1_single_player_flat_system_a6db7e42b2b9c2e5b02f94400843eb9d2}} 
+Vector\+Xf {\bfseries Linearizing\+Control} (const Vector\+Xf \&x, const Vector\+Xf \&v) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a594d67986244e731fb70ded660575020}\label{classilqgames_1_1_single_player_flat_system_a594d67986244e731fb70ded660575020}} 
+virtual Vector\+Xf {\bfseries To\+Linear\+System\+State} (const Vector\+Xf \&x) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a235d40a141ea4ae6ce39523aa0187d3e}\label{classilqgames_1_1_single_player_flat_system_a235d40a141ea4ae6ce39523aa0187d3e}} 
+virtual Vector\+Xf {\bfseries From\+Linear\+System\+State} (const Vector\+Xf \&xi) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a7c4f5712a49f29f7e2e5b0bebc645f87}\label{classilqgames_1_1_single_player_flat_system_a7c4f5712a49f29f7e2e5b0bebc645f87}} 
+virtual bool {\bfseries Is\+Linear\+System\+State\+Singular} (const Vector\+Xf \&xi) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_ac13f3f047b18f757fa0237b79024c22a}\label{classilqgames_1_1_single_player_flat_system_ac13f3f047b18f757fa0237b79024c22a}} 
+virtual void {\bfseries Partial} (const Vector\+Xf \&xi, std\+::vector$<$ Vector\+Xf $>$ $\ast$grads, std\+::vector$<$ Matrix\+Xf $>$ $\ast$hesses) const =0
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a746b1f3a2a9fffa9ca6754a3baa34e3b}\label{classilqgames_1_1_single_player_flat_system_a746b1f3a2a9fffa9ca6754a3baa34e3b}} 
+virtual float {\bfseries Distance\+Between} (const Vector\+Xf \&x0, const Vector\+Xf \&x1) const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_aba8e34600b716a2f3e07d10b7e4dae76}\label{classilqgames_1_1_single_player_flat_system_aba8e34600b716a2f3e07d10b7e4dae76}} 
+Dimension {\bfseries X\+Dim} () const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a7970d718d93f7b46710c8e063d46e63d}\label{classilqgames_1_1_single_player_flat_system_a7970d718d93f7b46710c8e063d46e63d}} 
+Dimension {\bfseries U\+Dim} () const
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_aab04053f573b24de4332b7e3d6325ec1}\label{classilqgames_1_1_single_player_flat_system_aab04053f573b24de4332b7e3d6325ec1}} 
+virtual std\+::vector$<$ Dimension $>$ {\bfseries Position\+Dimensions} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a4ab18a6147857ce85583ea41c1959a54}\label{classilqgames_1_1_single_player_flat_system_a4ab18a6147857ce85583ea41c1959a54}} 
+{\bfseries Single\+Player\+Flat\+System} (Dimension xdim, Dimension udim)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_aa658a8f808613f170ace84b6aca63a05}\label{classilqgames_1_1_single_player_flat_system_aa658a8f808613f170ace84b6aca63a05}} 
+const Dimension {\bfseries xdim\+\_\+}
+\item 
+\mbox{\Hypertarget{classilqgames_1_1_single_player_flat_system_a24a3044071823bdd4af74d8d5b89d3d7}\label{classilqgames_1_1_single_player_flat_system_a24a3044071823bdd4af74d8d5b89d3d7}} 
+const Dimension {\bfseries udim\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 51 of file single\+\_\+player\+\_\+flat\+\_\+system.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/abel/\+Documents/\+H\+R\+I\+\_\+\+Ph\+D/ilqgames/include/ilqgames/dynamics/single\+\_\+player\+\_\+flat\+\_\+system.\+h\end{DoxyCompactItemize}

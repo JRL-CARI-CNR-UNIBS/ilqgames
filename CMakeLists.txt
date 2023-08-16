@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 2.8.7)
-project(ilqgames C CXX)
+cmake_policy (SET CMP0072 OLD) # to suppress warning for developers
+cmake_policy (SET CMP0048 NEW) # to allow specifying project version
+
+project(ilqgames
+        LANGUAGES C CXX
+        VERSION 0.0.1
+)
+message("Project Version: " ${${PROJECT_NAME}_VERSION})
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Build options.
@@ -19,10 +27,16 @@ include(cmake/Dependencies.cmake)
 # Check for C++17 features and enable.
 ilqgames_enable_cpp17()
 
-# Set the build type. Default to Release mode.
+# # Set the build type. Default to Release mode.
+# if(NOT CMAKE_BUILD_TYPE)
+#   message("Defaulting to building targets in Release mode.")
+#   set(CMAKE_BUILD_TYPE Release)
+# endif(NOT CMAKE_BUILD_TYPE)
+
+# Set the build type. Default to Debug mode.
 if(NOT CMAKE_BUILD_TYPE)
-  message("Defaulting to building targets in Release mode.")
-  set(CMAKE_BUILD_TYPE Release)
+  message("Defaulting to building targets in Debug mode.")
+  set(CMAKE_BUILD_TYPE Debug)
 endif(NOT CMAKE_BUILD_TYPE)
 
 # Find and build third party libraries.
@@ -32,13 +46,12 @@ add_subdirectory(external)
 include_directories(${CMAKE_SOURCE_DIR}/include ${imgui_SOURCE_DIR}/include)
 
 # Collect source files and build the ilqgames object.
-file(GLOB_RECURSE ilqgames_srcs ${CMAKE_SOURCE_DIR}/src/*.cpp)
-add_library(ilqgames ${ilqgames_srcs})
+file(GLOB_RECURSE ${PROJECT_NAME}_srcs ${CMAKE_SOURCE_DIR}/src/*.cpp)
+add_library(${PROJECT_NAME} ${${PROJECT_NAME}_srcs})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} ${imgui_LIBRARIES})
 
 # Set compiler constants and expose them.
-# add_definitions(-DILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs")
-# set(ENV{ILQGAMES_LOG_DIR} "${CMAKE_SOURCE_DIR}/logs" CACHE STRING "Log directory used by the solver to dump results")
-target_compile_definitions(ilqgames PUBLIC ILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs") # logging directory used by the solver to dump results
+target_compile_definitions(${PROJECT_NAME} PUBLIC ILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs") # logging directory used by the solver to dump results
 
 # Display compiler constants
 get_target_property(DEFS ilqgames INTERFACE_COMPILE_DEFINITIONS)
@@ -46,18 +59,46 @@ message("Compile definitions: " ${DEFS})
 
 
 # === INSTALLATION === #
-
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ilqgames DESTINATION include/ilqgames)
-install(TARGETS ilqgames
-  # EXPORT ilqgamesTarget # MODIFICA
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Targets
   LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib)
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+  INCLUDES DESTINATION include
+)
 
-# install(EXPORT ilqgamesTarget # MODIFICA
-# DESTINATION share/ilqgames/cmake # MODIFICA
-# FILE ilqgamesTarget.cmake) # MODIFICA
+set(EXPORT_CONFIGDIR "lib/cmake/${PROJECT_NAME}")
+
+install(EXPORT ${PROJECT_NAME}Targets
+  FILE ${PROJECT_NAME}Targets.cmake
+  DESTINATION ${EXPORT_CONFIGDIR}
+)
 
 
+# === PACKAGING === #
+include(CMakePackageConfigHelpers)
+
+set(INCLUDE_DIR include)
+set(CONFIG_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake/config")
+
+configure_package_config_file(${CMAKE_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in 
+  ${CONFIG_DIR}/${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION ${EXPORT_CONFIGDIR}
+  PATH_VARS INCLUDE_DIR
+)
+
+write_basic_package_version_file(${CONFIG_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  VERSION ${${PROJECT_NAME}_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES
+  ${CONFIG_DIR}/${PROJECT_NAME}Config.cmake
+  ${CONFIG_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  DESTINATION ${EXPORT_CONFIGDIR}
+)
+
+
+# === ADDITIONAL BUILDS === #
 # Set up output directory for executables.
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/)
 

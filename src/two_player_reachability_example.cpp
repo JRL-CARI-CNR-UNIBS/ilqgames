@@ -47,6 +47,7 @@
 #include <ilqgames/cost/quadratic_cost.h>
 #include <ilqgames/dynamics/two_player_unicycle_4d.h>
 #include <ilqgames/examples/two_player_reachability_example.h>
+#include <ilqgames/examples/one_player_reachability_example.h> // to avoid redefinition of the same flags
 #include <ilqgames/geometry/draw_shapes.h>
 #include <ilqgames/geometry/polyline2.h>
 #include <ilqgames/solver/ilq_solver.h>
@@ -60,10 +61,10 @@
 #include <vector>
 
 // Initial state command-line flags.
-DEFINE_double(px0, 0.0, "Initial x-position (m).");
-DEFINE_double(py0, -10.0, "Initial y-position (m).");
-DEFINE_double(theta0, M_PI / 4.0, "Initial heading (rad).");
-DEFINE_double(v0, 5.0, "Initial speed (m/s).");
+//DEFINE_double(px0, 0.0, "Initial x-position (m).");
+//DEFINE_double(py0, -10.0, "Initial y-position (m).");
+//DEFINE_double(theta0, M_PI / 4.0, "Initial heading (rad).");
+//DEFINE_double(v0, 5.0, "Initial speed (m/s).");
 
 namespace ilqgames {
 

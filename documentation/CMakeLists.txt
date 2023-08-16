@@ -5,7 +5,7 @@ if (DOXYGEN_FOUND)
   set(DOXYGEN_CONFIG "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile")
 
   # Make the target.
-  add_custom_target(documentation
+  add_custom_target(documentation ALL # the "ALL" option is required to build together the doxygen executable and the documentation itself
     ${DOXYGEN_EXECUTABLE} ${DOXYGEN_CONFIG}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "-- Generating API documentation with Doxygen" VERBATIM

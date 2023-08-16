@@ -45,6 +45,7 @@
 #include <ilqgames/dynamics/concatenated_dynamical_system.h>
 #include <ilqgames/dynamics/single_player_car_5d.h>
 #include <ilqgames/examples/two_player_collision_avoidance_reachability_example.h>
+#include <ilqgames/examples/one_player_reachability_example.h> // to avoid redefinition of the same flags
 #include <ilqgames/geometry/draw_shapes.h>
 #include <ilqgames/geometry/polyline2.h>
 #include <ilqgames/solver/ilq_solver.h>
@@ -57,8 +58,8 @@
 #include <vector>
 
 // Initial state command-line flags.
-DEFINE_double(px0, 0.0, "Initial x-position (m).");
-DEFINE_double(py0, -5.0, "Initial y-position (m).");
+//DEFINE_double(px0, 0.0, "Initial x-position (m).");
+//DEFINE_double(py0, -5.0, "Initial y-position (m).");
 
 namespace ilqgames {
 
