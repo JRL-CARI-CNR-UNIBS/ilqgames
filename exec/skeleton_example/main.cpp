@@ -67,7 +67,7 @@ DEFINE_bool(save, true, "Optionally save solver logs to disk.");
 DEFINE_bool(viz, true, "Visualize results in a GUI.");
 DEFINE_bool(last_traj, false,
             "Should the solver only dump the last trajectory?");
-DEFINE_string(experiment_name, "", "Name for the experiment.");
+DEFINE_string(experiment_name, "skeleton_example", "Name for the experiment.");
 
 // Regularization.
 DEFINE_double(state_regularization, 1.0, "State regularization.");
