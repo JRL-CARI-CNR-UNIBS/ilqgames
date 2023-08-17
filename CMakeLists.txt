@@ -51,10 +51,11 @@ add_library(${PROJECT_NAME} ${${PROJECT_NAME}_srcs})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} ${imgui_LIBRARIES})
 
 # Set compiler constants and expose them.
-target_compile_definitions(${PROJECT_NAME} PUBLIC ILQGAMES_LOG_DIR="${CMAKE_SOURCE_DIR}/logs") # logging directory used by the solver to dump results
+set(LOG_DIR "${CMAKE_SOURCE_DIR}/logs" CACHE STRING "Logging directory used by the solver to dump results.")
+target_compile_definitions(${PROJECT_NAME} PUBLIC ILQGAMES_LOG_DIR="${LOG_DIR}")
 
 # Display compiler constants
-get_target_property(DEFS ilqgames INTERFACE_COMPILE_DEFINITIONS)
+get_target_property(DEFS ${PROJECT_NAME} INTERFACE_COMPILE_DEFINITIONS)
 message("Compile definitions: " ${DEFS})
 
 

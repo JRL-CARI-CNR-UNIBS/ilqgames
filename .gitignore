@@ -126,3 +126,6 @@ compile_commands.json
 # Doxygen documentation
 documentation/html
 documentation/latex
+
+# VSCode settings
+.vscode/
