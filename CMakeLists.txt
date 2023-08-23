@@ -98,8 +98,30 @@ install(FILES
   DESTINATION ${EXPORT_CONFIGDIR}
 )
 
+# Create debian package (optional) using CPack
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "MikFerrari") #required
+SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/MikFerrari/ilqgames.git")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "") # no dependecies from other deb packages
+SET(CPACK_OUTPUT_FILE_PREFIX packages) # output directory for deb package
+INCLUDE(CPack)
+
 
 # === ADDITIONAL BUILDS === #
+
+# Executables
+if (NOT BUILD_TESTS)
+  message("Add GLFW and IMGUI to build executables because BUILD_TESTS is disabled.")
+  # GLFW platform.
+  add_subdirectory(external/glfw)
+  include_directories(${glfw_SOURCE_DIR} ${glfw_INCLUDE_DIR})
+
+  # DearImGUI for graphical interfaces.
+  add_subdirectory(external/imgui)
+  include_directories(${imgui_SOURCE_DIR} ${imgui_INCLUDE_DIR})
+
+endif (NOT BUILD_TESTS)
+
 # Set up output directory for executables.
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/)
 
@@ -117,4 +139,3 @@ if (BUILD_DOCUMENTATION)
   message("Build documentation is enabled.")
   add_subdirectory(documentation)
 endif (BUILD_DOCUMENTATION)
-
