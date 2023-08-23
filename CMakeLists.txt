@@ -101,7 +101,7 @@ install(FILES
 # Create debian package (optional) using CPack
 SET(CPACK_GENERATOR "DEB")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "MikFerrari") #required
-SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/MikFerrari/ilqgames.git")
+SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/JRL-CARI-CNR-UNIBS/ilqgames.git")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "") # no dependecies from other deb packages
 SET(CPACK_OUTPUT_FILE_PREFIX packages) # output directory for deb package
 INCLUDE(CPack)
