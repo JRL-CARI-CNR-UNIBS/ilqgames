@@ -296,12 +296,14 @@ bool ILQSolver::ModifyLQStrategies(
   CHECK_NOTNULL(has_converged);
 
   // DEBUG: show how alphas are decaying - i.e., we're finding a fixed point.
-  //  std::cout << strategies->front().alphas.front().squaredNorm() <<
-  //  std::endl;
+  std::cout << "Squared norm of alpha: " << strategies->front().alphas.front().squaredNorm() <<
+  std::endl;
 
   // Precompute expected decrease before we do anything else.
   expected_decrease_ = ExpectedDecrease(*strategies, delta_xs, costates);
-  //  std::cout << expected_decrease_ << std::endl;
+
+  // DEBUG: show expected decrease
+  std::cout << "Expected decrease: " << expected_decrease_ << std::endl;
 
   // Every computation of the merit function will overwrite the current cost
   // quadraticization, so first swap it with the previous one so we retain a

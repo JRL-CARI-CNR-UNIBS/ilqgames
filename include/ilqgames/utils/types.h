@@ -135,7 +135,7 @@ namespace time {
 static constexpr Time kTimeStep = 0.1;
 
 // Time horizon (s).
-static constexpr Time kTimeHorizon = 10.0;
+static constexpr Time kTimeHorizon = 10.0; // DEFAULT: 10.0 s
 
 // Number of time steps.
 static constexpr size_t kNumTimeSteps =
