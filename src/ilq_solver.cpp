@@ -146,7 +146,7 @@ std::shared_ptr<SolverLog> ILQSolver::Solve(bool* success, Time max_runtime) {
     if (!ModifyLQStrategies(delta_xs, costates, &current_strategies,
                             &current_operating_point, &has_converged)) {
       // Maybe emit warning if exiting early.
-      VLOG(1) << "Solver exited due to linesearch failure.";
+      VLOG(1) << "ILQ Solver exited due to linesearch failure.";
 
       // Handle success flag.
       if (success) *success = false;
@@ -164,6 +164,13 @@ std::shared_ptr<SolverLog> ILQSolver::Solve(bool* success, Time max_runtime) {
     log->AddSolverIterate(current_operating_point, current_strategies,
                           total_costs, elapsed, has_converged);
   }
+
+  if (elapsed >= max_runtime - timer_.RuntimeUpperBound())
+    VLOG(1) << "ILQ Solver exited due to exceeded timeout.";
+  if (num_iterations >= params_.max_solver_iters)
+    VLOG(1) << "ILQ Solver exited due to exceeded iteration limit.";
+  if (has_converged)
+    VLOG(1) << "ILQ Solver exited due to attained convergence.";
 
   // Handle success flag.
   if (success) *success = true;
@@ -296,22 +303,20 @@ bool ILQSolver::ModifyLQStrategies(
   CHECK_NOTNULL(has_converged);
 
   // DEBUG: show how alphas are decaying - i.e., we're finding a fixed point.
-  std::cout << "Squared norm of alpha: " << strategies->front().alphas.front().squaredNorm() <<
-  std::endl;
+//  std::cout << "Squared norm of alpha: " << strategies->front().alphas.front().squaredNorm() << std::endl;
 
   // Precompute expected decrease before we do anything else.
   expected_decrease_ = ExpectedDecrease(*strategies, delta_xs, costates);
 
   // DEBUG: show expected decrease
-  std::cout << "Expected decrease: " << expected_decrease_ << std::endl;
+//  std::cout << "Expected decrease: " << expected_decrease_ << std::endl;
 
   // Every computation of the merit function will overwrite the current cost
   // quadraticization, so first swap it with the previous one so we retain a
   // copy.
   if (params_.linesearch) last_cost_quadraticization_.swap(cost_quadraticization_);
 
-  // Initially scale alphas by a fixed amount to avoid unnecessary
-  // backtracking.
+  // Initially scale alphas by a fixed amount to avoid unnecessary backtracking.
   // NOTE: use adaptive initialization here based on history.
   ScaleAlphas(params_.initial_alpha_scaling, strategies);
 

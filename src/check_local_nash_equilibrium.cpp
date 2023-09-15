@@ -103,16 +103,16 @@ bool NumericalCheckLocalNashEquilibrium(
         // Check Nash condition.
         if (std::min(perturbed_costs_lower[ii], perturbed_costs_upper[ii]) <
             nominal_costs[ii]) {
-          // std::printf(
-          //     "player %hu, timestep %zu: nominal %f > perturbed %f\n ", ii,
-          //     kk, nominal_costs[ii], std::min(perturbed_costs_lower[ii],
-          //     perturbed_costs_upper[ii]));
-          // std::cout << "nominal u: " <<
-          // operating_point.us[kk][ii].transpose()
-          //           << ", alpha original: "
-          //           << strategies[ii].alphas[kk].transpose()
-          //           << ", vs. perturbed " << alphak_lower.transpose()
-          //           << std::endl;
+            std::printf(
+               "player %hu, timestep %zu: nominal %f > perturbed %f\n ", ii,
+               kk, nominal_costs[ii], std::min(perturbed_costs_lower[ii],
+               perturbed_costs_upper[ii]));
+            std::cout << "nominal u: " <<
+            operating_point.us[kk][ii].transpose()
+                     << ", alpha original: "
+                     << strategies[ii].alphas[kk].transpose()
+                     << ", vs. perturbed " << alphak_lower.transpose()
+                     << std::endl;
 
           // Other users will likely want RK4 integration.
           if (!was_integrating_using_euler)
@@ -181,10 +181,9 @@ bool CheckSufficientLocalNashEquilibrium(
     for (const auto& q : quadraticization) {
       const auto eig_Q = Eigen::SelfAdjointEigenSolver<MatrixXf>(q.state.hess);
       if (eig_Q.eigenvalues().minCoeff() < -kErrorMargin) {
-        // std::cout << "Failed at timestep " << kk << std::endl;
-        // std::cout << "Q is: \n" << q.Q << std::endl;
-        // std::cout << "Q evals are: " << eig_Q.eigenvalues().transpose()
-        //           << std::endl;
+        std::cout << "Failed at timestep " << kk << std::endl;
+        std::cout << "Q is: \n" << q.state.hess << std::endl;
+        std::cout << "Q evals are: " << eig_Q.eigenvalues().transpose() << std::endl;
         return false;
       }
 
