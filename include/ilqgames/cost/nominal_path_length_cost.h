@@ -59,7 +59,7 @@ class NominalPathLengthCost : public Cost {
                         const std::string& name = "")
       : Cost(weight, name), dimension_(dim), nominal_speed_(nominal_speed) {}
 
-  // Evaluate this cost at the current time and  input.
+  // Evaluate this cost at the current time and input.
   float Evaluate(Time t, const VectorXf& input) const;
 
   // Quadraticize this cost at the given time and input, and add to the running
