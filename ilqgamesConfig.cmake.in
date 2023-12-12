@@ -10,6 +10,7 @@ find_dependency(OpenGL      REQUIRED)
 find_dependency(GLUT        REQUIRED)
 find_dependency(PkgConfig   REQUIRED)
 find_dependency(Boost       REQUIRED)
+# find_dependency(imgui       REQUIRED)
 
 include("${ilqgames_CMAKE_DIR}/ilqgamesTargets.cmake")
 

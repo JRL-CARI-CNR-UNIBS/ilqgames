@@ -1,7 +1,7 @@
 
 ####### Expanded from @PACKAGE_INIT@ by configure_package_config_file() #######
 ####### Any changes to this file will be overwritten by the next CMake run ####
-####### The input file was ilqgamesConfig.cmake.in                            ########
+####### The input file was imguiConfig.cmake.in                            ########
 
 get_filename_component(PACKAGE_PREFIX_DIR "${CMAKE_CURRENT_LIST_DIR}/../../../" ABSOLUTE)
 
@@ -24,22 +24,18 @@ endmacro()
 
 ####################################################################################
 
-get_filename_component(ilqgames_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component(imgui_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(CMakeFindDependencyMacro)
 
-find_dependency(Eigen3      REQUIRED)
-find_dependency(gflags      REQUIRED)
-find_dependency(glog        REQUIRED)
+find_dependency(glfw3      REQUIRED)
 find_dependency(OpenGL      REQUIRED)
 find_dependency(GLUT        REQUIRED)
 find_dependency(PkgConfig   REQUIRED)
-find_dependency(Boost       REQUIRED)
-# find_dependency(imgui       REQUIRED)
 
-include("${ilqgames_CMAKE_DIR}/ilqgamesTargets.cmake")
+include("${imgui_CMAKE_DIR}/imguiTargets.cmake")
 
-set(ilqgames_FOUND TRUE)
+set(imgui_FOUND TRUE)
 
-set(ilqgames_LIBRARIES ilqgames)
+set(imgui_LIBRARIES imgui)
 
-check_required_components(ilqgames)
+check_required_components(imgui)

@@ -61,6 +61,16 @@
 #include <Eigen/Geometry>
 #include <Eigen/StdVector>
 
+// This macro checks the verbosity level before logging the message at WARNING level
+#define VLOG_WARNING(verbose_level) \
+    if (VLOG_IS_ON(verbose_level)) \
+        LOG(WARNING)
+
+// This macro checks the verbosity level before logging the message at ERROR level
+#define VLOG_ERROR(verbose_level) \
+    if (VLOG_IS_ON(verbose_level)) \
+        LOG(ERROR)
+
 namespace ilqgames {
 
 // ------------------------ THIRD PARTY TYPEDEFS ---------------------------- //

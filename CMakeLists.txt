@@ -40,15 +40,20 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 # Find and build third party libraries.
+# set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) # instruct CMake to use the directories in the linker search path as the runtime search path
 add_subdirectory(external)
+list(APPEND ilqgames_LIBRARIES ${imgui_LIBRARIES})
 
 # Add the source directories to the search path so cmake can find our headers.
 include_directories(${CMAKE_SOURCE_DIR}/include ${imgui_SOURCE_DIR}/include)
 
+# Include imgui cmake targets.
+include(/usr/local/lib/cmake/imgui/imguiTargets.cmake)
+
 # Collect source files and build the ilqgames object.
 file(GLOB_RECURSE ${PROJECT_NAME}_srcs ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_srcs})
-target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} ${imgui_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} imgui)
 
 # Set compiler constants and expose them.
 set(LOG_DIR "${CMAKE_SOURCE_DIR}/logs" CACHE STRING "Logging directory used by the solver to dump results.")
@@ -108,20 +113,6 @@ INCLUDE(CPack)
 
 
 # === ADDITIONAL BUILDS === #
-
-# Executables
-if (NOT BUILD_TESTS)
-  message("Add GLFW and IMGUI to build executables because BUILD_TESTS is disabled.")
-  # GLFW platform.
-  add_subdirectory(external/glfw)
-  include_directories(${glfw_SOURCE_DIR} ${glfw_INCLUDE_DIR})
-
-  # DearImGUI for graphical interfaces.
-  add_subdirectory(external/imgui)
-  include_directories(${imgui_SOURCE_DIR} ${imgui_INCLUDE_DIR})
-
-endif (NOT BUILD_TESTS)
-
 # Set up output directory for executables.
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/)
 

@@ -93,6 +93,7 @@ std::shared_ptr<SolverLog> ILQSolver::Solve(bool* success, Time max_runtime) {
 
   // Things to keep track of during each iteration.
   size_t num_iterations = 0;
+  VLOG_WARNING(1) << "ILQ solver | Iteration: " << num_iterations << "";
   bool has_converged = false;
 
   // Swap operating points and compute new current operating point. Future
@@ -127,6 +128,7 @@ std::shared_ptr<SolverLog> ILQSolver::Solve(bool* success, Time max_runtime) {
 
     // New iteration.
     num_iterations++;
+    VLOG_WARNING(1) << "ILQ solver | Iteration: " << num_iterations << "";
 
     // Linearize dynamics about the new operating point, only if the system
     // can't be treated as linear from the outset, in which case we've already
@@ -146,7 +148,7 @@ std::shared_ptr<SolverLog> ILQSolver::Solve(bool* success, Time max_runtime) {
     if (!ModifyLQStrategies(delta_xs, costates, &current_strategies,
                             &current_operating_point, &has_converged)) {
       // Maybe emit warning if exiting early.
-      VLOG(1) << "ILQ Solver exited due to linesearch failure.";
+      VLOG_WARNING(1) << "ILQ Solver exited due to linesearch failure.";
 
       // Handle success flag.
       if (success) *success = false;
@@ -166,11 +168,11 @@ std::shared_ptr<SolverLog> ILQSolver::Solve(bool* success, Time max_runtime) {
   }
 
   if (elapsed >= max_runtime - timer_.RuntimeUpperBound())
-    VLOG(1) << "ILQ Solver exited due to exceeded timeout.";
+    VLOG_WARNING(1) << "ILQ Solver exited due to exceeded timeout.";
   if (num_iterations >= params_.max_solver_iters)
-    VLOG(1) << "ILQ Solver exited due to exceeded iteration limit.";
+    VLOG_WARNING(1) << "ILQ Solver exited due to exceeded iteration limit.";
   if (has_converged)
-    VLOG(1) << "ILQ Solver exited due to attained convergence.";
+    VLOG_WARNING(1) << "ILQ Solver exited due to attained convergence.";
 
   // Handle success flag.
   if (success) *success = true;
@@ -243,6 +245,7 @@ void ILQSolver::TotalCosts(const OperatingPoint& current_op,
     const Time t = RelativeTimeTracker::RelativeTime(kk);
 
     for (size_t ii = 0; ii < problem_->PlayerCosts().size(); ii++) {
+      VLOG_WARNING(1) << "Evaluating cost of player " << ii << " at time " << t;
       const float current_cost = problem_->PlayerCosts()[ii].Evaluate(
           t, current_op.xs[kk], current_op.us[kk]);
 
