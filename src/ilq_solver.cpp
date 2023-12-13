@@ -250,8 +250,9 @@ void ILQSolver::TotalCosts(const OperatingPoint& current_op,
           t, current_op.xs[kk], current_op.us[kk]);
 
       if (problem_->PlayerCosts()[ii].IsTimeAdditive())
-        (*total_costs)[ii] += problem_->PlayerCosts()[ii].Evaluate(
-            t, current_op.xs[kk], current_op.us[kk]);
+        // (*total_costs)[ii] += problem_->PlayerCosts()[ii].Evaluate(
+        //     t, current_op.xs[kk], current_op.us[kk]);
+        (*total_costs)[ii] += current_cost;
       else if (problem_->PlayerCosts()[ii].IsMaxOverTime() &&
                current_cost > (*total_costs)[ii]) {
         (*total_costs)[ii] = current_cost;

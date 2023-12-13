@@ -40,20 +40,21 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 # Find and build third party libraries.
-# set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) # instruct CMake to use the directories in the linker search path as the runtime search path
-add_subdirectory(external)
+
+# add_subdirectory(external)
+find_package(imgui REQUIRED)
 list(APPEND ilqgames_LIBRARIES ${imgui_LIBRARIES})
 
 # Add the source directories to the search path so cmake can find our headers.
 include_directories(${CMAKE_SOURCE_DIR}/include ${imgui_SOURCE_DIR}/include)
 
 # Include imgui cmake targets.
-include(/usr/local/lib/cmake/imgui/imguiTargets.cmake)
+#include(/usr/local/lib/cmake/imgui/imguiTargets.cmake)
 
 # Collect source files and build the ilqgames object.
 file(GLOB_RECURSE ${PROJECT_NAME}_srcs ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_srcs})
-target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} imgui)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} )
 
 # Set compiler constants and expose them.
 set(LOG_DIR "${CMAKE_SOURCE_DIR}/logs" CACHE STRING "Logging directory used by the solver to dump results.")
@@ -72,7 +73,7 @@ install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Targets
   INCLUDES DESTINATION include
 )
 
-set(EXPORT_CONFIGDIR "lib/cmake/${PROJECT_NAME}")
+set(EXPORT_CONFIGDIR "share/${PROJECT_NAME}/cmake")
 
 install(EXPORT ${PROJECT_NAME}Targets
   FILE ${PROJECT_NAME}Targets.cmake
