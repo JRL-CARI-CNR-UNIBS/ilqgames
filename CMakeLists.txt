@@ -1,60 +1,57 @@
-cmake_minimum_required(VERSION 2.8.7)
-cmake_policy (SET CMP0072 OLD) # to suppress warning for developers
+cmake_minimum_required(VERSION 3.0.0)
+cmake_policy (SET CMP0072 NEW) # to set OpenGL_GL_PREFERENCE to GLVND (use "OLD" to set to LEGACY)
 cmake_policy (SET CMP0048 NEW) # to allow specifying project version
 
 project(ilqgames
-        LANGUAGES C CXX
-        VERSION 0.0.1
+  LANGUAGES C CXX
+  VERSION 0.0.1
 )
 message("Project Version: " ${${PROJECT_NAME}_VERSION})
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Build options.
 option(BUILD_TESTS "Build tests" ON)
 option(BUILD_DOCUMENTATION "Build documentation" ON)
 
-# Add cmake modules.
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
-message("Cmake module path: ${CMAKE_MODULE_PATH}")
-
-# Add cmake utilities.
-include(cmake/Utils.cmake)
-
-# Add dependencies.
-include(cmake/Dependencies.cmake)
-
-# Check for C++17 features and enable.
-ilqgames_enable_cpp17()
-
-# # Set the build type. Default to Release mode.
-# if(NOT CMAKE_BUILD_TYPE)
-#   message("Defaulting to building targets in Release mode.")
-#   set(CMAKE_BUILD_TYPE Release)
-# endif(NOT CMAKE_BUILD_TYPE)
-
-# Set the build type. Default to Debug mode.
+# Set the build type. Default to Release mode.
 if(NOT CMAKE_BUILD_TYPE)
-  message("Defaulting to building targets in Debug mode.")
-  set(CMAKE_BUILD_TYPE Debug)
+  message("Defaulting to building targets in Release mode.")
+  set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
-# Find and build third party libraries.
-
-# add_subdirectory(external)
+# Find third party libraries.
+find_package(Eigen3 REQUIRED)
 find_package(imgui REQUIRED)
-list(APPEND ilqgames_LIBRARIES ${imgui_LIBRARIES})
 
-# Add the source directories to the search path so cmake can find our headers.
-include_directories(${CMAKE_SOURCE_DIR}/include ${imgui_SOURCE_DIR}/include)
+# If Gflags has been installed using "sudo apt-get install libgflags-dev", then one must specify the path to the CMake config files.
+find_package(gflags REQUIRED PATHS /usr/lib/x86_64-linux-gnu/) 
 
-# Include imgui cmake targets.
-#include(/usr/local/lib/cmake/imgui/imguiTargets.cmake)
+# If Glog has been installed using "sudo apt-get install libgoogle-glog-dev",
+# then one must use PkGConfig since the CMake config files are not provided.
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(glog REQUIRED libglog)
 
-# Collect source files and build the ilqgames object.
+# Include CMake utilities.
+include(cmake/Utils.cmake)
+
+# Check for C++17 support.
+ilqgames_enable_cpp17()
+
+# Collect source files and build the ilqgames library.
 file(GLOB_RECURSE ${PROJECT_NAME}_srcs ${CMAKE_SOURCE_DIR}/src/*.cpp)
-add_library(${PROJECT_NAME} ${${PROJECT_NAME}_srcs})
-target_link_libraries(${PROJECT_NAME} PUBLIC ${ilqgames_LIBRARIES} )
+add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_srcs})
+
+# Link dependent libraries to the target library ${PROJECT_NAME}.
+target_link_libraries(${PROJECT_NAME} PUBLIC imgui gflags glog)
+
+# Add to the target ${PROJECT_NAME} the include directories of the dependencies.
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${EIGEN3_INCLUDE_DIRS}
+  ${imgui_INCLUDE_DIRS}
+  ${gflags_INCLUDE_DIRS}
+  ${glog_INCLUDE_DIRS}
+)
 
 # Set compiler constants and expose them.
 set(LOG_DIR "${CMAKE_SOURCE_DIR}/logs" CACHE STRING "Logging directory used by the solver to dump results.")
@@ -66,11 +63,18 @@ message("Compile definitions: " ${DEFS})
 
 
 # === INSTALLATION === #
+# Install the library and export the library target.
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Targets
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include
+)
+
+# Install the header files.
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+  FILES_MATCHING PATTERN "*.h"
 )
 
 set(EXPORT_CONFIGDIR "share/${PROJECT_NAME}/cmake")
@@ -115,9 +119,14 @@ INCLUDE(CPack)
 
 # === ADDITIONAL BUILDS === #
 # Set up output directory for executables.
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/Debug/)
+else(CMAKE_BUILD_TYPE STREQUAL "Release")
+  set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/Release/)
+endif()
 
 # Find and build executables.
+message(STATUS "Building executables.")
 add_subdirectory(exec)
 
 # Find and build tests.

@@ -3,19 +3,32 @@
 get_filename_component(ilqgames_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(CMakeFindDependencyMacro)
 
+find_dependency(PkgConfig   REQUIRED) # used to find glog
 find_dependency(Eigen3      REQUIRED)
+find_dependency(imgui       REQUIRED)
 find_dependency(gflags      REQUIRED)
-find_dependency(glog        REQUIRED)
-find_dependency(OpenGL      REQUIRED)
-find_dependency(GLUT        REQUIRED)
-find_dependency(PkgConfig   REQUIRED)
-find_dependency(Boost       REQUIRED)
-# find_dependency(imgui       REQUIRED)
+pkg_check_modules(glog      REQUIRED libglog)
+
+if (BUILD_TESTS)
+  find_dependency(GTest REQUIRED)
+endif()
 
 include("${ilqgames_CMAKE_DIR}/ilqgamesTargets.cmake")
 
 set(ilqgames_FOUND TRUE)
 
-set(ilqgames_LIBRARIES ilqgames)
+set(ilqgames_INCLUDE_DIRS
+    "@CONF_INCLUDE_DIRS@"
+    ${EIGEN3_INCLUDE_DIRS}
+    ${imgui_INCLUDE_DIRS}
+    ${gflags_INCLUDE_DIRS}
+    ${glog_INCLUDE_DIRS}
+)
+
+set(ilqgames_LIBRARIES ilqgames
+    ${imgui_LIBRARIES}
+    ${gflags_LIBRARIES}
+    ${glog_LIBRARIES}
+)
 
 check_required_components(ilqgames)
